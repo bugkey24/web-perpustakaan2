@@ -29,7 +29,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <!-- Tambahkan Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         .form-section {
@@ -87,7 +86,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php if ($role === 'pustakawan'): ?>
                 <div class="card form-section shadow-sm">
                     <div class="card-body">
-                        <form method="post" enctype="multipart/form-data" id="formBibliografi" novalidate action="create.php">
+                        <form method="POST" enctype="multipart/form-data" id="formBibliografi" novalidate action="update.php">
                             <input type="hidden" name="id" id="idBibliografi" />
                             <div class="form-group">
                                 <label for="judul">Judul <small class="text-muted">*</small></label>
@@ -217,7 +216,6 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/script.js"></script>
@@ -241,31 +239,29 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 }
             });
 
-            // Inisialisasi Select2 pada kategori (opsional)
-            $('#kategori_id').select2({
-                placeholder: '-- Pilih Kategori --',
-                allowClear: true,
-                width: '100%'
-            });
-
             // Event tombol edit
             $('.editBtn').on('click', function() {
+                console.log("Tombol Edit Diklik"); // Menambahkan log untuk debugging
+
                 $('#formBibliografi').attr('action', 'update.php');
                 $('#idBibliografi').val($(this).data('id'));
                 $('#judul').val($(this).data('judul'));
-                $('#kategori_id').val(String($(this).data('kategori_id'))).trigger('change');
+                $('#kategori_id').val($(this).data('kategori_id')).trigger('change');
                 $('#penerbit').val($(this).data('penerbit'));
                 $('#tahun_terbit').val($(this).data('tahun_terbit'));
                 $('#jumlah_halaman').val($(this).data('jumlah_halaman'));
                 $('#jilid_ke').val($(this).data('jilid_ke'));
                 $('#abstrak').val($(this).data('abstrak'));
-                $('#sampul').val('');
+                $('#sampul').val(''); // Kosongkan field sampul jika akan mengedit
                 $('#submitBtn').text('Update Bibliografi');
                 $('#cancelBtn').removeClass('d-none');
+
+                // Menambahkan animasi untuk scroll ke atas
                 $('html, body').animate({
                     scrollTop: 0
                 }, 'fast');
 
+                // Menampilkan preview sampul jika ada
                 var sampul = $(this).data('sampul');
                 if (sampul) {
                     $('#previewSampul').html('<img src="../' + sampul + '" style="max-height:100px;" />');
@@ -286,7 +282,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $('#previewSampul').html('');
                 $('#btnClearSampul').hide();
                 $('#sampul').val('');
-                // Reset select2 kategori jika dipakai
+                // Reset select2 kategori
                 $('#kategori_id').val(null).trigger('change');
             });
 

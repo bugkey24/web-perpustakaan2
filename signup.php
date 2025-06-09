@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <div class="container d-flex justify-content-center">
     <div class="signup-container w-100">
-      <h3 class="mb-4 text-center text-primary font-weight-bold">Daftar Anggota Baru</h3>
+      <h3 class="mb-4 text-center text-primary font-weight-bold">DAFTAR ANGGOTA</h3>
 
       <?php if ($error) : ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="invalid-feedback">Konfirmasi password wajib diisi dan harus sama dengan password.</div>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Daftar</button>
+        <button type="submit" class="btn btn-primary btn-block">DAFTAR</button>
       </form>
 
       <div class="mt-3 text-center">

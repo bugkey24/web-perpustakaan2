@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <div class="container d-flex justify-content-center">
     <div class="login-container">
-      <h3 class="mb-4 text-center text-primary font-weight-bold">Login Perpustakaan</h3>
+      <h3 class="mb-4 text-center text-primary font-weight-bold">LOGIN PERPUSTAKAAN</h3>
 
       <?php if ($error) : ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label class="form-check-label" for="rememberme">Ingat saya</label>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
+        <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
       </form>
 
       <div class="mt-3 text-center">
